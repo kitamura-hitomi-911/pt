@@ -19,10 +19,40 @@
 </head>
 <body>
 <div id="wrapper">
-
+	<dl class="target">
+		<dt>チェック</dt>
+		<dd><input type="text"></dd>
+	</dl>
 </div>
+<script src="js/jquery-3.1.0.min.js"></script>
 <script src="date.js"></script>
 <script type="text/javascript">
+	function isZenkaku(){
+		var tgt = $('.target');
+		var val = tgt.find('input').val();
+		if(!val.match(/^[^\x01-\x7E]{1,12}$/)){
+			console.log('全角のみ・１～１２文字の条件を満たさず');
+		}else{
+			console.log('全角のみ・１～１２文字');
+		}
+	}
+	function is24byte(){
+		var tgt = $('.target');
+		var val = tgt.find('input').val();
+		if(get_bytes(val) <= 24){
+			console.log('24バイト以下'+get_bytes(val));
+		}else{
+			console.log('24バイトより大きい'+get_bytes(val));
+		}
+	}
+	function get_bytes(str) {
+		return(encodeURIComponent(str).replace(/%../g,"x").length);
+	}
+	function isZenkakuNum(){
+		var tgt = $('.target');
+		var val = tgt.find('input').val();
+		
+	}
 
 </script>
 </body>
