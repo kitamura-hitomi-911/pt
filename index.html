@@ -14,45 +14,201 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="apple-mobile-web-app-capable" content="no"/>
 	<meta name="format-detection" content="telephone=no, address=no"/>
+	<style>
+		/* reset */
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed,
+		figure, figcaption, footer, header, hgroup,
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video, input {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font: inherit;
+			font-size: 100%;
+			vertical-align: baseline;
+		}
+		html {
+			overflow-y: scroll;
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		caption, th, td {
+			text-align: left;
+			font-weight: normal;
+			vertical-align: middle;
+		}
+		q, blockquote {
+			quotes: none;
+		}
+		q:before, q:after, blockquote:before, blockquote:after {
+			content: "";
+			content: none;
+		}
+		a img {
+			border: none;
+		}
+		a {
+			text-decoration: none;
+		}
+		article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+			display: block;
+		}
+		html {
+			height: 100%;
+		}
+		body {
+			height: 100%;
+			font-family: arial, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+			font-size:16px;
+			line-height: 20px;
+			color: #3c454c;
+			-webkit-text-size-adjust: 100%;
+			word-wrap: break-word;
+			overflow-wrap : break-word;
+		}
+		#content{
+			padding:10px;
+		}
+		dl{
+			display:flex;
+			align-items:center;
+			border-bottom:1px solid #ccc;
+		}
+		dl:first-child{
+			border-top:1px solid #ccc;
+		}
+		dt{
+			width:10em;
+			padding:20px;
+			text-align: right;
+		}
+		dd{
+			padding:20px 20px 20px 0;
+		}
+		dd input{
+			padding:2px 4px;
+			border:1px solid #999;
+		}
+		dd.result{
+			color:#f00;
+		}
+	</style>
 
 	<title>Date</title>
 </head>
 <body>
 <div id="wrapper">
-	<dl class="target">
-		<dt>チェック</dt>
-		<dd><input type="text"></dd>
-	</dl>
+	<div id="content">
+		<dl class="zenkaku">
+			<dt>全角のみ12文字以内</dt>
+			<dd><input type="text"></dd>
+			<dd><a href="#" onclick="isZenkaku(this);return false;">チェック！</a></dd>
+		</dl>
+		<dl class="byte">
+			<dt>24バイト以内</dt>
+			<dd><input type="text"></dd>
+			<dd><a href="#" onclick="is24byte(this);return false;">チェック！</a></dd>
+		</dl>
+		<dl class="zenkakubun">
+			<dt>全角12文字分</dt>
+			<dd><input type="text"></dd>
+			<dd><a href="#" onclick="is12Zenkakubun(this);return false;">チェック！</a></dd>
+		</dl>
+		<dl class="date-diff">
+			<dt>2016年11月内</dt>
+			<dd><input type="text" placeholder="YYYY-MM-DD"></dd>
+			<dd><a href="#" onclick="isInTerm(this);return false;">チェック！</a></dd>
+		</dl>
+		<dl class="date-in2weeks">
+			<dt>その日まで2週間以内</dt>
+			<dd><input type="text" placeholder="YYYY-MM-DD"></dd>
+			<dd><a href="#" onclick="isIn2weeks(this);return false;">チェック！</a></dd>
+		</dl>
+	</div>
 </div>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="date.js"></script>
 <script type="text/javascript">
-	function isZenkaku(){
-		var tgt = $('.target');
+	function isZenkaku(that){
+		var tgt = $(that).closest('dl');
+		tgt.find('dd.result').remove();
 		var val = tgt.find('input').val();
 		if(!val.match(/^[^\x01-\x7E]{1,12}$/)){
-			console.log('全角のみ・１～１２文字の条件を満たさず');
+			tgt.append('<dd class="result"><p>全角、12文字以内で入力してください</p></dd>');
 		}else{
-			console.log('全角のみ・１～１２文字');
+			tgt.append('<dd class="result"><p></p></dd>');
 		}
+		return;
 	}
-	function is24byte(){
-		var tgt = $('.target');
+	function is24byte(that){
+		var tgt = $(that).closest('dl');
+		tgt.find('dd.result').remove();
 		var val = tgt.find('input').val();
 		if(get_bytes(val) <= 24){
-			console.log('24バイト以下'+get_bytes(val));
+			tgt.append('<dd class="result"><p>24バイト以下'+get_bytes(val)+'</p></dd>');
 		}else{
-			console.log('24バイトより大きい'+get_bytes(val));
+			tgt.append('<dd class="result"><p>24バイトより大きい'+get_bytes(val)+'</p></dd>');
 		}
+		function get_bytes(str) {
+			return(encodeURIComponent(str).replace(/%../g,"x").length);
+		}
+		return;
 	}
-	function get_bytes(str) {
-		return(encodeURIComponent(str).replace(/%../g,"x").length);
-	}
-	function isZenkakuNum(){
-		var tgt = $('.target');
+
+	function is12Zenkakubun(that){
+		var tgt = $(that).closest('dl');
+		tgt.find('dd.result').remove();
 		var val = tgt.find('input').val();
-		
+		var cnt = 0;
+		for(var i=0;i<val.length;i++){
+			if(val.charAt(i).match(/[^\x01-\x7E]/)){
+				cnt+=1;
+			}else{
+				cnt+=0.5;
+			}
+		}
+		tgt.append('<dd class="result"><p>'+cnt+'文字分です</p></dd>');
+		return;
 	}
+
+	function isInTerm(that){
+		var tgt = $(that).closest('dl');
+		tgt.find('dd.result').remove();
+		var val = tgt.find('input').val();
+		if(isDateWithinPeriod(val)){
+			tgt.append('<dd class="result"><p>期間内です</p></dd>');
+		}else{
+			tgt.append('<dd class="result"><p>期間外、もしくはフォーマットがおかしいです</p></dd>');
+		}
+		return;
+	}
+	function isIn2weeks(that){
+		var tgt = $(that).closest('dl');
+		tgt.find('dd.result').remove();
+		var val = tgt.find('input').val();
+		if(isCut2weeksToBeHeld(val)){
+			tgt.append('<dd class="result"><p>その日まで2週間きったorすでに過ぎた</p></dd>');
+		}else{
+			tgt.append('<dd class="result"><p>その日まで2週間以上ある</p></dd>');
+		}
+		return;
+	}
+
 
 </script>
 </body>
