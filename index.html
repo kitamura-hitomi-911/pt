@@ -105,29 +105,22 @@
 		dd.result {
 			color: #f00;
 		}
-		.select-customize{
+		.select-customize {
 			padding: 20px;
 			border-bottom: 1px solid #ccc;
 		}
-		.select-area{
-			position: relative;
-			width:300px;
-			padding:6px;
-			border:1px solid #ccc;
-			background-color:#eee;
+		.select-customize select {
+			opacity: 0;  /* 初期値として必須 */
 		}
-		.select-area select{
+		.select-wrapper select {
 			position: absolute;
-			top:0;
-			left:0;
-			width:100%;
-			height:100%;
-			font-size:100%;
-			font-family:inherit;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			font-size: 100%;
+			font-family: inherit;
 			opacity: 0;
-		}
-		.select-area option{
-			font-size:100%;
 		}
 	</style>
 	<title>処理確認画面</title>
@@ -161,15 +154,12 @@
 			<dd><a href="#" onclick="isIn2weeks(this);return false;">チェック！</a></dd>
 		</dl>
 		<div class="select-customize">
-			<div class="select-area">
-				<p>ここに文字入る</p>
-				<select name="" id="">
-					<option value="">未選択</option>
-					<option value="1">やっほー</option>
-					<option value="2">ですね</option>
-					<option value="3">あいうえお</option>
-				</select>
-			</div>
+			<select name="" id="tgt-select">
+				<option value="">未選択</option>
+				<option value="1">やっほー</option>
+				<option value="2">ですね</option>
+				<option value="3">あいうえお</option>
+			</select>
 		</div>
 	</div>
 </div>
@@ -181,8 +171,15 @@
 	</ul>
 </script>
 <script src="js/jquery-3.1.0.min.js"></script>
+<script src="jquery.select_customize.js"></script>
 <script src="date.js"></script>
 <script type="text/javascript">
+	$('#tgt-select').select_customize({
+		callback: function(selected){
+			console.log('callbackです');
+			console.log(selected);
+		}
+	});
 	function isZenkaku(that){
 		var tgt = $(that).closest('dl');
 		tgt.find('dd.result').remove();
