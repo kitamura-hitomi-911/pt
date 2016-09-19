@@ -9,7 +9,6 @@
 	<meta http-equiv="Content-Style-Type" content="text/css"/>
 	<meta http-equiv="Content-Script-Type" content="text/javascript"/>
 	<meta name="description" content="説明文"/>
-
 	<!-- スマホ向けのmeta情報 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="apple-mobile-web-app-capable" content="no"/>
@@ -74,41 +73,40 @@
 		body {
 			height: 100%;
 			font-family: arial, "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
-			font-size:16px;
+			font-size: 16px;
 			line-height: 20px;
 			color: #3c454c;
 			-webkit-text-size-adjust: 100%;
 			word-wrap: break-word;
-			overflow-wrap : break-word;
+			overflow-wrap: break-word;
 		}
-		#content{
-			padding:10px;
+		#content {
+			padding: 10px;
 		}
-		dl{
-			display:flex;
-			align-items:center;
-			border-bottom:1px solid #ccc;
+		dl {
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid #ccc;
 		}
-		dl:first-child{
-			border-top:1px solid #ccc;
+		dl:first-child {
+			border-top: 1px solid #ccc;
 		}
-		dt{
-			width:10em;
-			padding:20px;
+		dt {
+			width: 10em;
+			padding: 20px;
 			text-align: right;
 		}
-		dd{
-			padding:20px 20px 20px 0;
+		dd {
+			padding: 20px 20px 20px 0;
 		}
-		dd input{
-			padding:2px 4px;
-			border:1px solid #999;
+		dd input {
+			padding: 2px 4px;
+			border: 1px solid #999;
 		}
-		dd.result{
-			color:#f00;
+		dd.result {
+			color: #f00;
 		}
 	</style>
-
 	<title>Date</title>
 </head>
 <body>
@@ -141,6 +139,13 @@
 		</dl>
 	</div>
 </div>
+<script type="text/template" id="tmpl-test">
+	<ul>
+		<% for(var i=0;i<10;i++){ %>
+		<li><%= i %></li>
+		<% } %>
+	</ul>
+</script>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="date.js"></script>
 <script type="text/javascript">
@@ -160,13 +165,14 @@
 		tgt.find('dd.result').remove();
 		var val = tgt.find('input').val();
 		if(get_bytes(val) <= 24){
-			tgt.append('<dd class="result"><p>24バイト以下'+get_bytes(val)+'</p></dd>');
+			tgt.append('<dd class="result"><p>24バイト以下' + get_bytes(val) + '</p></dd>');
 		}else{
-			tgt.append('<dd class="result"><p>24バイトより大きい'+get_bytes(val)+'</p></dd>');
+			tgt.append('<dd class="result"><p>24バイトより大きい' + get_bytes(val) + '</p></dd>');
 		}
-		function get_bytes(str) {
-			return(encodeURIComponent(str).replace(/%../g,"x").length);
+		function get_bytes(str){
+			return (encodeURIComponent(str).replace(/%../g, "x").length);
 		}
+
 		return;
 	}
 
@@ -175,14 +181,14 @@
 		tgt.find('dd.result').remove();
 		var val = tgt.find('input').val();
 		var cnt = 0;
-		for(var i=0;i<val.length;i++){
+		for(var i = 0; i < val.length; i++){
 			if(val.charAt(i).match(/[^\x01-\x7E]/)){
-				cnt+=1;
+				cnt += 1;
 			}else{
-				cnt+=0.5;
+				cnt += 0.5;
 			}
 		}
-		tgt.append('<dd class="result"><p>'+cnt+'文字分です</p></dd>');
+		tgt.append('<dd class="result"><p>' + cnt + '文字分です</p></dd>');
 		return;
 	}
 
@@ -212,8 +218,6 @@
 		}
 		return;
 	}
-
-
 </script>
 </body>
 </html>

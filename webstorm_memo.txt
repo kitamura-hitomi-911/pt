@@ -1,0 +1,27 @@
+■Setting
+Ctrl+Alt+s
+Lanaugage & Frameworks > javascript > library で jquery と underscore を追加した
+
+■Function 宣言・使用箇所の切り替え移動
+Ctrl+b
+
+■Function 使用箇所検索
+Alt+F7
+
+■検索してファイルを開く
+Ctrl+Shift+n
+
+■なんでも検索
+Shift+Shift
+
+■コピー履歴からペースト
+Ctrl+Shift+v
+
+■変数名・関数名を対象にしたrename
+Shift+F6
+
+■変数宣言
+Ctrl+Alt+v
+
+■正規表現チェック
+Alt+Return
