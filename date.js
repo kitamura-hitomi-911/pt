@@ -9,8 +9,14 @@ function isCut2weeksToBeHeld(target_date, current_date){
 	if(target_date){
 		var current_date_obj = current_date ? dateStr2dateObj(current_date) : new Date();// 0時で比較するようにする
 		var target_date_obj = dateStr2dateObj(target_date);
-		if(current_date_obj && target_date_obj && current_date_obj.getTime() - target_date_obj.getTime() <= 14 * 24 * 60 * 60 * 1000){
-			is_cut = true;
+		if(current_date_obj && target_date_obj){
+			if(target_date_obj.getTime() <= current_date_obj.getTime()){
+				is_cut = true;//すでに過ぎてる
+				console.log('すでに過ぎた');
+			}else if(target_date_obj.getTime() - current_date_obj.getTime() <= 14 * 24 * 60 * 60 * 1000){
+				is_cut = true;// 2週間きった
+				console.log('2週間きった');
+			}
 		}
 	}
 	return is_cut;
