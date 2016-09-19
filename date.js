@@ -4,22 +4,23 @@
  * @param current_date
  * @returns {boolean}
  */
-function isCut2weeksToBeHeld(target_date, current_date){
-	var is_cut = false;
+function hasCut2weeksUntilTargetDate(target_date, current_date){
+	var status;
 	if(target_date){
 		var current_date_obj = current_date ? dateStr2dateObj(current_date) : new Date();// 0時で比較するようにする
 		var target_date_obj = dateStr2dateObj(target_date);
 		if(current_date_obj && target_date_obj){
 			if(target_date_obj.getTime() <= current_date_obj.getTime()){
-				is_cut = true;//すでに過ぎてる
-				console.log('すでに過ぎた');
+				status = 'already_passed';//すでに過ぎてる
 			}else if(target_date_obj.getTime() - current_date_obj.getTime() <= 14 * 24 * 60 * 60 * 1000){
-				is_cut = true;// 2週間きった
-				console.log('2週間きった');
+				status = 'has_cut_2weeks';// 2週間きった
+			}else{
+				status = 'left_more_than_2weeks';
 			}
 		}
 	}
-	return is_cut;
+	console.log(status);
+	return status;
 }
 
 /**

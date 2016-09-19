@@ -201,10 +201,14 @@
 		var tgt = $(that).closest('dl');
 		tgt.find('dd.result').remove();
 		var val = tgt.find('input').val();
-		if(isCut2weeksToBeHeld(val)){
-			tgt.append('<dd class="result"><p>その日まで2週間きったorすでに過ぎた</p></dd>');
+		if(hasCut2weeksUntilTargetDate(val) == 'already_passed'){
+			tgt.append('<dd class="result"><p>その日はすでに過ぎた</p></dd>');
+		}else if(hasCut2weeksUntilTargetDate(val) == 'has_cut_2weeks'){
+			tgt.append('<dd class="result"><p>その日まで2週間きった</p></dd>');
+		}else if(hasCut2weeksUntilTargetDate(val) == 'left_more_than_2weeks'){
+			tgt.append('<dd class="result"><p>その日まで2週間以上あります</p></dd>');
 		}else{
-			tgt.append('<dd class="result"><p>その日まで2週間以上あるか不明</p></dd>');
+			tgt.append('<dd class="result"><p>不明</p></dd>');
 		}
 		return;
 	}
