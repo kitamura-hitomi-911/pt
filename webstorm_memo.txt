@@ -2,6 +2,16 @@
 Ctrl+Alt+s
 Lanaugage & Frameworks > javascript > library で jquery と underscore を追加した
 
+※以下をローカルの保存して登録もできそう
+https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/jquery/jquery.d.ts
+（ ドキュメントURL http://api.jquery.com/ ）
+https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/jqueryui/jqueryui.d.ts
+（ ドキュメントURL http://jqueryui.com/demos/ ）
+https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/underscore/underscore.d.ts
+（ ドキュメントURL →なかった ）
+
+■ホストされたライブラリ系JS（jQueryとか）のパス上でAlt+Enterでダウンロードしてくれる
+
 ■Function 宣言・使用箇所の切り替え移動
 Ctrl+b
 
@@ -25,3 +35,7 @@ Ctrl+Alt+v
 
 ■正規表現チェック
 Alt+Return
+
+■あとから囲む
+Ctrl+Alt+t
+
