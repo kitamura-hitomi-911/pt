@@ -76,6 +76,26 @@
 						</dl>
 					</div>
 				</li>
+				<li>
+					<div class="rect-box">
+						<dl>
+							<dt>画像</dt>
+							<dd>
+								<p class="owner"><a href="#">名前</a></p>
+							</dd>
+						</dl>
+					</div>
+				</li>
+				<li>
+					<div class="rect-box">
+						<dl>
+							<dt>画像</dt>
+							<dd>
+								<p class="owner"><a href="#">名前</a></p>
+							</dd>
+						</dl>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -94,7 +114,8 @@
 	$('#tgt-select').select_customize({
 		callback: function(selected){
 			console.log('callbackです');
-			console.log(selected);
+			console.log('選択valueは'+selected.val()+'、ラベルは'+selected.text());
+			return;
 		}
 	});
 	function isZenkaku(that){
