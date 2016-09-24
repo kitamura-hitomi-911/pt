@@ -7,7 +7,10 @@
 				width: 'auto',
 				padding: '6px',
 				border: '1px solid #ccc',
-				'background-color': '#eee'
+				'border-radius':'3px',
+				background: '-webkit-linear-gradient(rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%)',
+				background: 'linear-gradient(rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%)',
+				'background-color':'#efefef',
 			},
 			'label-css': {},
 			'label-after-css': {
@@ -19,7 +22,7 @@
 				right: '10px',
 				'margin-top': '-5px',
 				border: '6px solid transparent',
-				'border-top': '10px solid #333',
+				'border-top': '10px solid #666',
 			},
 			'select-wrapper-select-css': {
 				position: 'absolute',
