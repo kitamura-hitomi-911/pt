@@ -39,3 +39,5 @@ Alt+Return
 ■あとから囲む
 Ctrl+Alt+t
 
+■選択範囲
+Ctrl+w でどんどん広げる
